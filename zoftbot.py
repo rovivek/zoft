@@ -1,5 +1,6 @@
 import streamlit as st
 from dotenv import load_dotenv
+load_dotenv()
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
@@ -108,7 +109,8 @@ def main():
     st.header("ZoftBot :books:")
     # print(vectorstore)
     # create conversation chain
-    llm = ChatOpenAI()
+    openai_api_key = os.environ.get("OPENAI_API_KEY")
+    llm = ChatOpenAI(api_key=openai_api_key)
     if 'entity_memory' not in st.session_state:
             st.session_state.entity_memory = ConversationEntityMemory(llm=llm, k=10)
     Conversation = ConversationChain(
