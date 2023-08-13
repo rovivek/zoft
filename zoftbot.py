@@ -109,7 +109,7 @@ def main():
     st.header("ZoftBot :books:")
     # print(vectorstore)
     # create conversation chain
-    openai_api_key = st.secrets["OPENAI_API_KEY"]
+    openai_api_key = st.secrets["api_keys"]["OPENAI_API_KEY"]
     llm = ChatOpenAI(api_key=openai_api_key)
     if 'entity_memory' not in st.session_state:
             st.session_state.entity_memory = ConversationEntityMemory(llm=llm, k=10)
